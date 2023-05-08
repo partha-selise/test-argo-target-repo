@@ -16,7 +16,7 @@ fullnameOverride: ""
 
 env:
   - name: "ASPNETCORE_ENVIRONMENT"
-    value: "dev-az"
+    value: "prod-az"
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -88,31 +88,31 @@ tolerations: []
 
 affinity: {}
 
-volumeMounts:
-  - mountPath: /app/config
-    name: ecap-config-volume
-  - mountPath: /app/keys/public-key
-    name: pub-key
-  - mountPath: /app/keys/private-key
-    name: priv-key
-  - mountPath: /app/ecaplog
-    name: ecap-logs
-    readOnly: false
-
-volumes:
-  - name: ecap-config-volume
-    nfs:
-      path: /nfs/dev/config/ecap-config
-      server: 10.5.25.19
-  - name: pub-key
-    nfs:
-      path: /nfs/dev/env/keys/public-key
-      server: 10.5.25.19
-  - name: priv-key
-    nfs:
-      path: /nfs/dev/env/keys/private-key
-      server: 10.5.25.19
-  - name: ecap-logs
-    nfs:
-      path: /nfs/dev/containerlogs/experimentalservice/dev-ecap-experimentalservice-v1
-      server: 10.5.25.19
+  #volumeMounts:
+  #  - mountPath: /app/config
+  #    name: ecap-config-volume
+  #  - mountPath: /app/keys/public-key
+  #    name: pub-key
+  #  - mountPath: /app/keys/private-key
+  #    name: priv-key
+  #  - mountPath: /app/ecaplog
+  #    name: ecap-logs
+  #    readOnly: false
+  #
+  #volumes:
+  #  - name: ecap-config-volume
+  #    nfs:
+  #      path: /nfs/dev/config/ecap-config
+  #      server: 10.5.25.19
+  #  - name: pub-key
+  #    nfs:
+  #      path: /nfs/dev/env/keys/public-key
+  #      server: 10.5.25.19
+  #  - name: priv-key
+  #    nfs:
+  #      path: /nfs/dev/env/keys/private-key
+  #      server: 10.5.25.19
+  #  - name: ecap-logs
+  #    nfs:
+  #      path: /nfs/dev/containerlogs/experimentalservice/dev-ecap-experimentalservice-v1
+  #      server: 10.5.25.19
