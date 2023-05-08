@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: selise.azurecr.io/prod-experimentalservice
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: 41e5959cb14ca2439406162308b0b821921e2af1
 
 imagePullSecrets: []
 nameOverride: ""
@@ -57,8 +57,7 @@ ingress:
   hosts:
     - host: microservices.seliselocal.com
       paths:
-        #- path: /api/experimentalservice/v3(/|$)(.*)
-        - path: /
+        - path: /api/experimentalservice/v3(/|$)(.*)
           pathType: ImplementationSpecific
   tls: []
   #  - secretName: chart-example-tls
