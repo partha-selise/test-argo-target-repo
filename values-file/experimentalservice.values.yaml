@@ -57,7 +57,8 @@ ingress:
   hosts:
     - host: microservices.seliselocal.com
       paths:
-        - path: /api/experimentalservice/v3(/|$)(.*)
+        #- path: /api/experimentalservice/v3(/|$)(.*)
+        - path: /
           pathType: ImplementationSpecific
   tls: []
   #  - secretName: chart-example-tls
