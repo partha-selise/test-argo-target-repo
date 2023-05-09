@@ -1,0 +1,119 @@
+# Default values for ecap3-webservice.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: selise.azurecr.io/prod-football-astonvilla
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: dbd70e3357f0f67fe13d6817f95ca90c6b28a983
+
+imagePullSecrets:
+  - name: acr-credentials
+nameOverride: ""
+fullnameOverride: ""
+
+env:
+  - name: "ASPNETCORE_ENVIRONMENT"
+    value: "prod-az"
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext:
+  {}
+  # fsGroup: 2000
+
+securityContext:
+  {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations:
+    # kubernetes.io/ingress.class: n
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  hosts:
+    - host: astonvillafs.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+probes:
+  enabled: false
+
+resources:
+  limits:
+    cpu: 50m
+    memory: 100Mi
+  requests:
+    cpu: 30m
+    memory: 70Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+  #volumeMounts:
+  #  - mountPath: /app/config
+  #    name: ecap-config-volume
+  #  - mountPath: /app/keys/public-key
+  #    name: pub-key
+  #  - mountPath: /app/keys/private-key
+  #    name: priv-key
+  #  - mountPath: /app/ecaplog
+  #    name: ecap-logs
+  #    readOnly: false
+  #
+  #volumes:
+  #  - name: ecap-config-volume
+  #    nfs:
+  #      path: /nfs/dev/config/ecap-config
+  #      server: 10.5.25.19
+  #  - name: pub-key
+  #    nfs:
+  #      path: /nfs/dev/env/keys/public-key
+  #      server: 10.5.25.19
+  #  - name: priv-key
+  #    nfs:
+  #      path: /nfs/dev/env/keys/private-key
+  #      server: 10.5.25.19
+  #  - name: ecap-logs
+  #    nfs:
+  #      path: /nfs/dev/containerlogs/experimentalservice/dev-ecap-experimentalservice-v1
+  #      server: 10.5.25.19
