@@ -6,7 +6,7 @@ image:
   repository: selise.azurecr.io/prod-football-astonvilla
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: b396041052de6798f783aa943dd03c8d624a3eeb
+  tag: 65a4ae1795eec74931af31faf58d9a4338431322
 imagePullSecrets:
   - name: acr-credentials
 nameOverride: ""
