@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: astonvillafsservice
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/partha-selise/test-argo-target-repo.git
+    path: ./helm-templates/ecap3-webclient
+    targetRevision: main
+    helm:
+      releaseName: astonvillafsservice
+      valueFiles:
+        - ../../values-file/astonvilla-app.values.yaml
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: prod-astonvillafc
+  syncPolicy:
+    automated:
+      selfHeal: true

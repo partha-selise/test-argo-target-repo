@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: experimentalservice-win
+  namespace: argocd
+spec:
+  project: default
+  source:
+    #chart: experimentalservice
+    repoURL: https://github.com/partha-selise/test-argo-target-repo.git
+    path: ./helm-templates/ecap3-winservice
+    targetRevision: main
+    helm:
+      releaseName: experimentalservice-win
+      valueFiles:
+        - ../../values-file/experimentalservice-win.values.yaml
+          #- argo-deployment/test-argo-target-repo/values-file/experimentalservice.values.yaml
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: prod-experimental-service
+  syncPolicy:
+    automated: {}

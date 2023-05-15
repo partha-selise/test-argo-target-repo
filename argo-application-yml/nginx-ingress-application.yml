@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-ingress
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/partha-selise/test-argo-target-repo.git
+    path: ./helm-nginx-ingress/nginx-ingress
+    targetRevision: main
+    helm:
+      releaseName: nginx-ingress
+      valueFiles:
+        - ./values.yaml
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: nginx-ingress
+  syncPolicy:
+    automated:
+      selfHeal: true
