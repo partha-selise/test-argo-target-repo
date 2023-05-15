@@ -79,10 +79,10 @@ controller:
 
     ## The entries of the ConfigMap for customizing NGINX configuration.
     entries: {
-      use-forwarded-headers: "true"
-      server-tokens: "False"
-      client-header-buffer-size: 64k
-      proxy-buffer-size: 64k
+      use-forwarded-headers: "true",
+      server-tokens: "False",
+      client-header-buffer-size: 64k,
+      proxy-buffer-size: 64k,
       proxy-body-size: 10m
       #proxy-read-timeout: "600"
       #proxy-send-timeout: "600"
@@ -297,7 +297,7 @@ controller:
 
     ## The annotations of the Ingress Controller service.
     annotations: {
-      service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+      #service.beta.kubernetes.io/azure-load-balancer-internal: "true"
     }
 
     ## The extra labels of the service.
