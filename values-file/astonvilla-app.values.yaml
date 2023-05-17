@@ -8,7 +8,7 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: 65a4ae1795eec74931af31faf58d9a4338431322
 imagePullSecrets:
-  - name: acr-credentials
+  - name: registry-credentials
 nameOverride: ""
 fullnameOverride: ""
 env:
