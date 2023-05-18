@@ -2,7 +2,8 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.4
+    controller-gen.kubebuilder.io/version: v0.11.3
+  creationTimestamp: null
   name: policies.k8s.nginx.org
 spec:
   group: k8s.nginx.org
@@ -91,8 +92,6 @@ spec:
                   properties:
                     clientCertSecret:
                       type: string
-                    crlFileName:
-                      type: string
                     verifyClient:
                       type: string
                     verifyDepth:
@@ -115,14 +114,8 @@ spec:
                   description: OIDC defines an Open ID Connect policy.
                   type: object
                   properties:
-                    accessTokenEnable:
-                      type: boolean
                     authEndpoint:
                       type: string
-                    authExtraArgs:
-                      type: array
-                      items:
-                        type: string
                     clientID:
                       type: string
                     clientSecret:
@@ -163,8 +156,6 @@ spec:
                   description: WAF defines an WAF policy.
                   type: object
                   properties:
-                    apBundle:
-                      type: string
                     apPolicy:
                       type: string
                     enable:

@@ -2,20 +2,14 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: {{ include "nginx-ingress.controller.fullname" . }}
+  name: {{ include "nginx-ingress.serviceMonitorName" . }}
   namespace: {{ .Release.Namespace }}
   labels:
-    {{- include "nginx-ingress.labels" . | nindent 4 }}
-  {{- if .Values.controller.serviceMonitor.labels -}}
     {{- toYaml .Values.controller.serviceMonitor.labels | nindent 4 }}
-  {{- end }}
 spec:
   selector:
     matchLabels:
-    {{- if .Values.controller.serviceMonitor.selectorMatchLabels -}}
-      {{- toYaml .Values.controller.serviceMonitor.selectorMatchLabels | nindent 6 }}
-    {{- end }}
-      {{- include "nginx-ingress.selectorLabels" . | nindent 6 }}
+  {{- toYaml .Values.controller.serviceMonitor.selectorMatchLabels | nindent 6 }}
   endpoints:
   {{- toYaml .Values.controller.serviceMonitor.endpoints | nindent 4 }}
 {{- end }}

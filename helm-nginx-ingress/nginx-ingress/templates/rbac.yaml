@@ -2,7 +2,7 @@
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: {{ include "nginx-ingress.fullname" . }}
+  name: {{ include "nginx-ingress.name" . }}
   labels:
     {{- include "nginx-ingress.labels" . | nindent 4 }}
 rules:
@@ -71,10 +71,8 @@ rules:
   resources:
   - pods
   verbs:
-  - get
   - list
   - watch
-  - update
 - apiGroups:
   - ""
   resources:
@@ -192,7 +190,7 @@ rules:
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: {{ include "nginx-ingress.fullname" . }}
+  name: {{ include "nginx-ingress.name" . }}
   labels:
     {{- include "nginx-ingress.labels" . | nindent 4 }}
 subjects:
@@ -201,6 +199,6 @@ subjects:
   namespace: {{ .Release.Namespace }}
 roleRef:
   kind: ClusterRole
-  name: {{ include "nginx-ingress.fullname" . }}
+  name: {{ include "nginx-ingress.name" . }}
   apiGroup: rbac.authorization.k8s.io
 {{- end }}
