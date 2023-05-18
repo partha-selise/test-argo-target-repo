@@ -83,6 +83,8 @@ controller:
       server-tokens: "False",
       client-header-buffer-size: 64k,
       proxy-buffer-size: 64k,
+      proxy-buffers: 8 64k
+      proxy-busy-buffers-size: 32k
       proxy-body-size: 10m
       #proxy-read-timeout: "600"
       #proxy-send-timeout: "600"
